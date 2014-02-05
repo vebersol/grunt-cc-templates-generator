@@ -18,7 +18,6 @@ module.exports = function(grunt) {
 				options: {},
 				src: 'tmp/templates/**.html',
 				dest: 'tmp/generated/templates/',
-				components_path: 'tmp/components/',
 				components_src: 'tmp/components/',
 				components_dest: 'tmp/generated/components/'
 			}

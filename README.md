@@ -28,10 +28,11 @@ grunt.initConfig({
       default_options: {
         options: {},
         src: 'tmp/templates/**.html',
-        dest: 'tmp/generated/',
-        components: 'tmp/components/'
-      },
-    },
+        dest: 'tmp/generated/templates/',
+        components_src: 'tmp/components/',
+        components_dest: 'tmp/generated/components/'
+      }
+    }
 });
 ```
 
@@ -50,10 +51,11 @@ grunt.initConfig({
       default_options: {
         options: {},
         src: 'tmp/templates/**.html',
-        dest: 'tmp/generated/',
-        components: 'tmp/components/'
-      },
-    },
+        dest: 'tmp/generated/templates/',
+        components_src: 'tmp/components/',
+        components_dest: 'tmp/generated/components/'
+      }
+    }
 });
 ```
 

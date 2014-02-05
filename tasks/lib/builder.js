@@ -13,7 +13,7 @@ exports.init = function Builder(grunt, options) {
 			methods.src = src;
 			methods.f = f;
 			methods.dest = methods.getFilename(src, f.dest);
-			methods.components = f.components_path;
+			methods.components = f.components_src;
 
 			methods.generateTemplate();
 		},
