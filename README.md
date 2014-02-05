@@ -25,60 +25,35 @@ In your project's Gruntfile, add a section named `cc_templates_generator` to the
 ```js
 grunt.initConfig({
   cc_templates_generator: {
-    options: {
-      // Task-specific options go here.
+      default_options: {
+        options: {},
+        src: 'tmp/templates/**.html',
+        dest: 'tmp/generated/',
+        components: 'tmp/components/'
+      },
     },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
 });
 ```
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
-
-A string value that is used to do something with whatever.
-
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
+Currently there are no options to be set
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, the default options will get templates from templates path (src) and generate templates on destination path (dest). The components path must be set.
 
 ```js
 grunt.initConfig({
   cc_templates_generator: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      default_options: {
+        options: {},
+        src: 'tmp/templates/**.html',
+        dest: 'tmp/generated/',
+        components: 'tmp/components/'
+      },
     },
-  },
-});
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  cc_templates_generator: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
 });
 ```
 
@@ -86,4 +61,6 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+
+ * 2014-02-04   v0.1.0   First commit
+ * 2014-02-05   v0.1.1   Buider functionality

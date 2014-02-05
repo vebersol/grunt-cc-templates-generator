@@ -1,41 +1,39 @@
 {
-  "name": "grunt-cc-templates-generator",
-  "description": "A plugin that generates templates based on components.",
-  "version": "0.1.0",
-  "homepage": "https://github.com/vebersol/grunt-cc-templates-generator",
-  "author": {
-    "name": "Vinícius Ebersol",
-    "email": "vebersol@gmail.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/vebersol/grunt-cc-templates-generator.git"
-  },
-  "bugs": {
-    "url": "https://github.com/vebersol/grunt-cc-templates-generator/issues"
-  },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/vebersol/grunt-cc-templates-generator/blob/master/LICENSE-MIT"
-    }
-  ],
-  "engines": {
-    "node": ">= 0.8.0"
-  },
-  "scripts": {
-    "test": "grunt test"
-  },
-  "devDependencies": {
-    "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-clean": "~0.4.0",
-    "grunt-contrib-nodeunit": "~0.2.0",
-    "grunt": "~0.4.2"
-  },
-  "peerDependencies": {
-    "grunt": "~0.4.2"
-  },
-  "keywords": [
-    "gruntplugin"
-  ]
+	"name": "grunt-cc-templates-generator",
+	"description": "A plugin that generates templates based on components.",
+	"version": "0.1.1",
+	"homepage": "https://github.com/vebersol/grunt-cc-templates-generator",
+	"author": {
+		"name": "Vinícius Ebersol",
+		"email": "vebersol@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/vebersol/grunt-cc-templates-generator.git"
+	},
+	"bugs": {
+		"url": "https://github.com/vebersol/grunt-cc-templates-generator/issues"
+	},
+	"licenses": [{
+		"type": "MIT",
+		"url": "https://github.com/vebersol/grunt-cc-templates-generator/blob/master/LICENSE-MIT"
+	}],
+	"engines": {
+		"node": ">= 0.8.0"
+	},
+	"scripts": {
+		"test": "grunt test"
+	},
+	"devDependencies": {
+		"grunt-contrib-jshint": "~0.6.0",
+		"grunt-contrib-clean": "~0.4.0",
+		"grunt-contrib-nodeunit": "~0.2.0",
+		"grunt": "~0.4.2"
+	},
+	"peerDependencies": {
+		"grunt": "~0.4.2"
+	},
+	"keywords": [
+		"gruntplugin"
+	]
 }
