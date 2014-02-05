@@ -1,7 +1,7 @@
 {
 	"name": "grunt-cc-templates-generator",
 	"description": "A plugin that generates templates based on components.",
-	"version": "0.2",
+	"version": "0.2.0",
 	"homepage": "https://github.com/vebersol/grunt-cc-templates-generator",
 	"author": {
 		"name": "Vinicius Ebersol",
