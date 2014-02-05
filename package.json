@@ -1,10 +1,10 @@
 {
 	"name": "grunt-cc-templates-generator",
 	"description": "A plugin that generates templates based on components.",
-	"version": "0.1.1",
+	"version": "0.2",
 	"homepage": "https://github.com/vebersol/grunt-cc-templates-generator",
 	"author": {
-		"name": "Vinícius Ebersol",
+		"name": "Vinicius Ebersol",
 		"email": "vebersol@gmail.com"
 	},
 	"repository": {
@@ -25,9 +25,6 @@
 		"test": "grunt test"
 	},
 	"devDependencies": {
-		"grunt-contrib-jshint": "~0.6.0",
-		"grunt-contrib-clean": "~0.4.0",
-		"grunt-contrib-nodeunit": "~0.2.0",
 		"grunt": "~0.4.2"
 	},
 	"peerDependencies": {

@@ -8,15 +8,17 @@ exports.init = function Builder(grunt, options) {
 		src: '',
 		dest: '',
 		components: '',
-		init: function(src, dest, components) {
+		f: '',
+		init: function(src, f) {
 			methods.src = src;
-			methods.dest = methods.getFilename(src, dest);;
-			methods.components = components;
+			methods.f = f;
+			methods.dest = methods.getFilename(src, f.dest);
+			methods.components = f.components_path;
 
-			methods.readTemplate();
+			methods.generateTemplate();
 		},
 
-		readTemplate: function() {
+		generateTemplate: function() {
 			var data = fs.readFileSync(methods.src, {
 				encoding: 'utf-8'
 			}, function(err, data) {
@@ -26,12 +28,33 @@ exports.init = function Builder(grunt, options) {
 			methods.outputData(data);
 		},
 
-		outputData: function(data) {
-			html = data;
-			methods.replaceContents(data);
+		generateComponent: function() {
+			grunt.file.recurse(methods.f.components_src, function(abspath, rootdir, subdir, filename) {
+				var data = grunt.file.read(abspath, {
+					encoding: 'utf-8'
+				}),
+					jsonPath = filename.match('.html') ? methods.f.components_src + 'data/' + filename.replace('.html', '.json') : null,
+					json = jsonPath ? methods.loadJSON(jsonPath) : null,
+					content;
+
+				if (json && json.data && json.data.length > 0) {
+					content = methods.replaceContent(data, json.data[0]);
+
+					if (content) {
+						methods.writeComponent(filename, content);
+					}
+				} else {
+					methods.copyFile(subdir, filename);
+				}
+			});
 		},
 
-		replaceContents: function(data) {
+		outputData: function(data) {
+			html = data;
+			methods.addTemplateComponents(data);
+		},
+
+		addTemplateComponents: function(data) {
 			var matchers = data.match(/\{\{.*\}\}/g),
 				componentsHTML = [];
 
@@ -46,11 +69,16 @@ exports.init = function Builder(grunt, options) {
 
 		getComponent: function(matcher) {
 			var data,
-				path = methods.components + matcher.match(/\{\{(.*)\}\}/)[1] + '.html',
+				str = matcher.match(/\{\{(.*)\}\}/)[1],
+				matcherArr = str.split(','),
+				path = methods.components + matcherArr[0] + '.html',
+				index = matcherArr.length > 1 ? matcherArr[1] : null,
+				jsonPath = methods.components + 'data/' + matcherArr[0] + '.json',
 				cstr = '<COMPONENT>',
 				componentStart,
 				componentEnd,
-				componentHTML;
+				componentHTML,
+				json;
 
 			data = fs.readFileSync(path, {
 				encoding: 'utf-8'
@@ -58,11 +86,22 @@ exports.init = function Builder(grunt, options) {
 				if (err) throw err;
 			});
 
+			json = methods.loadJSON(jsonPath);
+
 			componentStart = data.indexOf(cstr) + cstr.length;
 			componentEnd = data.indexOf('</COMPONENT>');
 			componentHTML = data.substring(componentStart, componentEnd);
+			componentHTML = methods.addComponentContent(componentHTML, json, index);
 
 			return componentHTML;
+		},
+
+		loadJSON: function(path) {
+			if (grunt.file.exists(path)) {
+				json = grunt.file.read(path);
+				json = JSON.parse(json);
+				return json;
+			}
 		},
 
 		addComponent: function(component, matchers) {
@@ -78,11 +117,64 @@ exports.init = function Builder(grunt, options) {
 			grunt.log.ok('File "' + methods.dest + '" created.');
 		},
 
+		writeComponent: function(filename, html) {
+			grunt.file.write(methods.f.components_dest + filename, html);
+			grunt.log.ok('File "' + methods.f.components_dest + filename + '" created.');
+		},
+
+		copyFile: function(subdir, filename) {
+			var path = subdir ? methods.f.components_src + subdir + '/' : methods.f.components_src,
+				destPath = subdir ? methods.f.components_dest + subdir + '/' : methods.f.components_dest,
+				origin = path + filename,
+				target = destPath + filename;
+
+			grunt.file.copy(origin, target);
+
+			grunt.log.ok('File "' + origin + '" copy to ' + target + '.');
+		},
+
 		getFilename: function(src, dest) {
 			var pathArr = src.split('/'),
 				filename = pathArr[pathArr.length - 1];
 
 			return dest + filename;
+		},
+
+		addComponentContent: function(content, json, index) {
+			if (json && json.data && index !== null) {
+				content = methods.addClasses(content, json.data[index]);
+				content = methods.replaceContent(content, json.data[index]);
+			}
+
+			return content;
+		},
+
+		replaceContent: function(content, json) {
+			var pattern,
+				matcher;
+			for (i in json) {
+				if (json.hasOwnProperty(i) && (i != 'classRegex') && (i != 'classToAdd')) {
+					pattern = new RegExp('{%' + i + '%}');
+					matcher = content.match(pattern);
+
+					if (matcher) {
+						content = content.replace(matcher[0], json[i]);
+					}
+				}
+			}
+
+			return content;
+		},
+
+		addClasses: function(content, json) {
+			var pattern = new RegExp(json.classRegex);
+			var matcher = content.match(pattern);
+
+			if (matcher) {
+				content = content.replace(matcher[0], matcher[0] + ' ' + json.classToAdd);
+			}
+
+			return content;
 		}
 	}
 

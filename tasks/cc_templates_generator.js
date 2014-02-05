@@ -32,10 +32,12 @@ module.exports = function(grunt) {
 				}
 			}).map(function(filepath) {
 				// Read file source.
-				builder.init(filepath, f.dest, f.components);
+				builder.init(filepath, f);
 				// return grunt.file.read(filepath);
 			});
 		});
+
+		builder.generateComponent();
 	});
 
 };
