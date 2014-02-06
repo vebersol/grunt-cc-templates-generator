@@ -17,6 +17,7 @@ exports.init = function Builder(grunt, options) {
 			methods.f = f;
 			methods.dest = core.getFilename(src, f.dest);
 			methods.components = f.components_src;
+
 			templates.generate(src, f);
 		},
 
@@ -60,6 +61,13 @@ exports.init = function Builder(grunt, options) {
 			grunt.file.copy(origin, target);
 
 			grunt.log.ok('File "' + origin + '" copy to ' + target + '.');
+		},
+
+		clean: function(path) {
+			if (grunt.file.exists(path)) {
+				grunt.log.ok('Components path removed:  "' + path);
+				grunt.file.delete(path);
+			}
 		}
 	}
 

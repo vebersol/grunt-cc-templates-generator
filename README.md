@@ -97,3 +97,4 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
  * 2014-02-06   v0.2.3   Remove logs
  * 2014-02-06   v0.2.4   Bugfix
  * 2014-02-06   v0.2.5   Bugfix
+ * 2014-02-06   v0.2.6   Remove components folder before generate again

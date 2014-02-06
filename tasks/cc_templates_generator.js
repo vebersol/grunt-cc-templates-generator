@@ -25,6 +25,8 @@ module.exports = function(grunt) {
 
 		var builder = require('./lib/builder').init(grunt, options);
 
+		builder.clean(this.data.components_dest);
+
 		// Iterate over all specified file groups.
 		this.files.forEach(function(f) {
 			// Concat specified files.
