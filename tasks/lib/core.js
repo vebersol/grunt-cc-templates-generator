@@ -25,7 +25,6 @@ exports.init = function Core(grunt, options) {
 
 		replaceAssetsPath: function(html, isComponent) {
 			var path = isComponent ? options.assetsPath.components : options.assetsPath.templates;
-			console.log(path, '-------->>>>>>>>');
 
 			if (path !== null) {
 				regex = new RegExp('{#assetsPath#}', 'g');
@@ -33,7 +32,6 @@ exports.init = function Core(grunt, options) {
 
 				if (matcher) {
 					html = html.replace(regex, path);
-					console.log(html);
 				}
 			}
 
