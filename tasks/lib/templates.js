@@ -27,13 +27,17 @@ exports.init = function Templates(grunt, options) {
 			var matchers = data.match(/\{\{.*\}\}/g),
 				componentsHTML = [];
 
-			for (i in matchers) {
-				if (matchers.hasOwnProperty(i)) {
-					componentsHTML.push(methods.getComponent(matchers[i]));
+			if (matchers) {
+				for (i in matchers) {
+					if (matchers.hasOwnProperty(i)) {
+						componentsHTML.push(methods.getComponent(matchers[i]));
+					}
 				}
-			}
 
-			methods.addComponent(componentsHTML, matchers);
+				methods.addComponent(componentsHTML, matchers);
+			} else {
+				methods.writeTemplate(data);
+			}
 		},
 
 		addComponent: function(component, matchers) {
