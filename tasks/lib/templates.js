@@ -80,6 +80,8 @@ exports.init = function Templates(grunt, options) {
 			if (json && json.data && index !== null) {
 				content = methods.addClasses(content, json.data[index]);
 				content = methods.replaceContent(content, json.data[index]);
+			} else {
+				content = core.replaceAssetsPath(content);
 			}
 
 			return content;
@@ -99,10 +101,11 @@ exports.init = function Templates(grunt, options) {
 					if (matcher) {
 						replReg = new RegExp(matcher[0] + '+', 'g');
 						content = content.replace(replReg, json[i]);
-						content = core.replaceAssetsPath(content, isComponent);
 					}
 				}
 			}
+
+			content = core.replaceAssetsPath(content, isComponent);
 
 			return content;
 		},

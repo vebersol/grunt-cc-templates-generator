@@ -93,5 +93,6 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
  * 2014-02-05   v0.1.1   Buider functionality
  * 2014-02-05   v0.2.0   Improve template generation
  * 2014-02-05   v0.2.1   Enable uses of variables
- * 2014-02-05   v0.2.2   Different paths for templates and components can be set
- * 2014-02-05   v0.2.3   Remove logs
+ * 2014-02-06   v0.2.2   Different paths for templates and components can be set
+ * 2014-02-06   v0.2.3   Remove logs
+ * 2014-02-06   v0.2.4   Bugfix
