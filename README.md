@@ -26,7 +26,13 @@ In your project's Gruntfile, add a section named `cc_templates_generator` to the
 grunt.initConfig({
   cc_templates_generator: {
       default_options: {
-        options: {},
+        options: {
+          vars: {},
+          assetsPath: {
+            templates: '',
+            components: ''
+          }
+        },
         src: 'tmp/templates/**.html',
         dest: 'tmp/generated/templates/',
         components_src: 'tmp/components/',
@@ -38,7 +44,20 @@ grunt.initConfig({
 
 ### Options
 
-Currently there are no options to be set
+#### options.vars
+Type: `Object`
+Default value: `{}`
+
+Here you can set many different vars to be used in your templates/components
+
+#### options.assetsPath
+Type: `Object`
+Default value: `{
+  templates: '',
+  components: ''
+}`
+
+You can define different path for your assets if your templates and components will be in different paths
 
 ### Usage Examples
 
@@ -49,7 +68,13 @@ In this example, the default options will get templates from templates path (src
 grunt.initConfig({
   cc_templates_generator: {
       default_options: {
-        options: {},
+        options: {
+          vars: {},
+          assetsPath: {
+            templates: '',
+            components: ''
+          }
+        },
         src: 'tmp/templates/**.html',
         dest: 'tmp/generated/templates/',
         components_src: 'tmp/components/',
@@ -66,3 +91,6 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
  * 2014-02-04   v0.1.0   First commit
  * 2014-02-05   v0.1.1   Buider functionality
+ * 2014-02-05   v0.2.0   Improve template generation
+ * 2014-02-05   v0.2.1   Enable uses of variables
+ * 2014-02-05   v0.2.2   Different paths for templates and components can be set
