@@ -16,7 +16,11 @@ module.exports = function(grunt) {
 	grunt.registerMultiTask('cc_templates_generator', 'A plugin that generates templates based on components.', function() {
 		// Merge task-specific and/or target-specific options with these defaults.
 		var options = this.options({
-			vars: {}
+			vars: {},
+			assetsPath: {
+				templates: '',
+				components: ''
+			}
 		});
 
 		var builder = require('./lib/builder').init(grunt, options);

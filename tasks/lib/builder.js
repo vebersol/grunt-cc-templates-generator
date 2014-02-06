@@ -32,12 +32,13 @@ exports.init = function Builder(grunt, options) {
 				data = core.replaceVars(data);
 
 				if (json && json.data && json.data.length > 0) {
-					content = templates.replaceContent(data, json.data[0]);
+					content = templates.replaceContent(data, json.data[0], true);
 
 					if (content) {
 						methods.writeComponent(filename, content);
 					}
 				} else if (filename.match('\.html')) {
+					data = core.replaceAssetsPath(data, true);
 					methods.writeComponent(filename, data);
 				} else {
 					methods.copyFile(subdir, filename);

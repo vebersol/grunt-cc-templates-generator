@@ -17,8 +17,13 @@ module.exports = function(grunt) {
 			default_options: {
 				options: {
 					vars: {
-						templatesAssetsPath: './',
-						componentsAssetsPath: '../../../../'
+						templatesAssetsPath: '',
+						componentsAssetsPath: '../../../'
+					},
+
+					assetsPath: {
+						templates: '',
+						components: '../../'
 					}
 				},
 				src: 'tmp/templates/**.html',

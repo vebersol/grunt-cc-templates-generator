@@ -9,7 +9,7 @@ exports.init = function Core(grunt, options) {
 			for (i in options.vars) {
 				if (options.vars.hasOwnProperty(i)) {
 					path = options.vars[i];
-					if (path) {
+					if (path !== null) {
 						regex = new RegExp('{#' + i + '#}', 'g');
 						matcher = html.match(regex);
 
@@ -17,6 +17,23 @@ exports.init = function Core(grunt, options) {
 							html = html.replace(regex, path);
 						}
 					}
+				}
+			}
+
+			return html;
+		},
+
+		replaceAssetsPath: function(html, isComponent) {
+			var path = isComponent ? options.assetsPath.components : options.assetsPath.templates;
+			console.log(path, '-------->>>>>>>>');
+
+			if (path !== null) {
+				regex = new RegExp('{#assetsPath#}', 'g');
+				matcher = html.match(regex);
+
+				if (matcher) {
+					html = html.replace(regex, path);
+					console.log(html);
 				}
 			}
 

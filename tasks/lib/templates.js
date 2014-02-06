@@ -85,7 +85,7 @@ exports.init = function Templates(grunt, options) {
 			return content;
 		},
 
-		replaceContent: function(content, json) {
+		replaceContent: function(content, json, isComponent) {
 			var pattern,
 				matcher,
 				replReg;
@@ -99,6 +99,7 @@ exports.init = function Templates(grunt, options) {
 					if (matcher) {
 						replReg = new RegExp(matcher[0] + '+', 'g');
 						content = content.replace(replReg, json[i]);
+						content = core.replaceAssetsPath(content, isComponent);
 					}
 				}
 			}
