@@ -9,6 +9,7 @@ exports.init = function Builder(grunt, options) {
 		dest: '',
 		components: '',
 		f: '',
+		vars: options.vars,
 		init: function(src, f) {
 			methods.src = src;
 			methods.f = f;
@@ -37,12 +38,16 @@ exports.init = function Builder(grunt, options) {
 					json = jsonPath ? methods.loadJSON(jsonPath) : null,
 					content;
 
+				data = methods.replaceVars(data);
+
 				if (json && json.data && json.data.length > 0) {
 					content = methods.replaceContent(data, json.data[0]);
 
 					if (content) {
 						methods.writeComponent(filename, content);
 					}
+				} else if (filename.match('\.html')) {
+					methods.writeComponent(filename, data);
 				} else {
 					methods.copyFile(subdir, filename);
 				}
@@ -50,8 +55,29 @@ exports.init = function Builder(grunt, options) {
 		},
 
 		outputData: function(data) {
-			html = data;
+			html = methods.replaceVars(data);
 			methods.addTemplateComponents(data);
+		},
+
+		replaceVars: function(html) {
+			var path,
+				regex,
+				matcher;
+			for (i in methods.vars) {
+				if (methods.vars.hasOwnProperty(i)) {
+					path = methods.vars[i];
+					if (path) {
+						regex = new RegExp('{#' + i + '#}', 'g');
+						matcher = html.match(regex);
+
+						if (matcher) {
+							html = html.replace(regex, path);
+						}
+					}
+				}
+			}
+
+			return html;
 		},
 
 		addTemplateComponents: function(data) {
@@ -151,14 +177,18 @@ exports.init = function Builder(grunt, options) {
 
 		replaceContent: function(content, json) {
 			var pattern,
-				matcher;
+				matcher,
+				replReg;
+
 			for (i in json) {
 				if (json.hasOwnProperty(i) && (i != 'classRegex') && (i != 'classToAdd')) {
-					pattern = new RegExp('{%' + i + '%}');
+					pattern = new RegExp('{%' + i + '%}', 'g');
 					matcher = content.match(pattern);
 
+
 					if (matcher) {
-						content = content.replace(matcher[0], json[i]);
+						replReg = new RegExp(matcher[0] + '+', 'g');
+						content = content.replace(replReg, json[i]);
 					}
 				}
 			}
@@ -167,10 +197,10 @@ exports.init = function Builder(grunt, options) {
 		},
 
 		addClasses: function(content, json) {
-			var pattern = new RegExp(json.classRegex);
-			var matcher = content.match(pattern);
+			var pattern = new RegExp(json.classRegex),
+				matcher = content.match(pattern);
 
-			if (matcher) {
+			if (json.classToAdd && matcher) {
 				content = content.replace(matcher[0], matcher[0] + ' ' + json.classToAdd);
 			}
 

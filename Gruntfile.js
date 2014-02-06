@@ -15,7 +15,12 @@ module.exports = function(grunt) {
 		// Configuration to be run (and then tested).
 		cc_templates_generator: {
 			default_options: {
-				options: {},
+				options: {
+					vars: {
+						templatesAssetsPath: './',
+						componentsAssetsPath: '../../../../'
+					}
+				},
 				src: 'tmp/templates/**.html',
 				dest: 'tmp/generated/templates/',
 				components_src: 'tmp/components/',
