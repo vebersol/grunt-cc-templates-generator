@@ -82,9 +82,11 @@ exports.init = function Builder(grunt, options) {
 				iframes = '';
 
 			for (i = 0; i < sourceFiles.length; i++) {
-				iframes += "<h1>" + sourceFiles[i] + "</h1>\n";
-				iframes += '<iframe src="' + sourceFiles[i] + '" width="100%" height="300" frameborder="0"></iframe>';
+				iframes += '<div class="DAWCL-content-list-title">';
+				iframes += "	<h1>" + sourceFiles[i] + "</h1>\n";
+				iframes += '	<iframe src="' + sourceFiles[i] + '" width="100%" height="500" frameborder="0"></iframe>';
 				iframes += "\n";
+				iframes += '</div>';
 			}
 
 			methods.writeIndex(iframes);
