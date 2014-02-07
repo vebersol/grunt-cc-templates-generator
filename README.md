@@ -102,3 +102,4 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
  * 2014-02-07   v0.2.8   Create list of components using iframes
  * 2014-02-07   v0.2.9   Better output for index
  * 2014-02-07   v0.3.0   Remove code tags from components
+ * 2014-02-07   v0.3.1   Fix publish issue
