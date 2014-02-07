@@ -44,7 +44,6 @@ exports.init = function Templates(grunt, options) {
 		addComponent: function(component, matchers) {
 			for (var i = 0; i < matchers.length; i++) {
 				var cleaned = core.cleanComponent(component[i]);
-				console.log(cleaned);
 				html = html.replace(matchers[i], cleaned);
 			}
 

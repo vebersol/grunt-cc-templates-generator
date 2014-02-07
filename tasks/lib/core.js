@@ -54,7 +54,7 @@ exports.init = function Core(grunt, options) {
 		},
 
 		cleanComponent: function (html) {
-			return html.replace(/<code[^>]*>((.|[\n\r])*)<\/code>/im, '---------------------------------------->>>>>>>>>>');
+			return html.replace(/<code[^>]*>((.|[\n\r])*)<\/code>/im, '');
 		}
 	};
 
