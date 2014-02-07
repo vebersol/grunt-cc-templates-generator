@@ -1,5 +1,6 @@
 exports.init = function Templates(grunt, options) {
 	var methods,
+		html,
 		core = require('./core').init(grunt, options);
 
 	methods = {
@@ -42,7 +43,9 @@ exports.init = function Templates(grunt, options) {
 
 		addComponent: function(component, matchers) {
 			for (var i = 0; i < matchers.length; i++) {
-				html = html.replace(matchers[i], component[i]);
+				var cleaned = core.cleanComponent(component[i]);
+				console.log(cleaned);
+				html = html.replace(matchers[i], cleaned);
 			}
 
 			methods.writeTemplate(html);

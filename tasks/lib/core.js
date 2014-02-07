@@ -51,6 +51,10 @@ exports.init = function Core(grunt, options) {
 				filename = pathArr[pathArr.length - 1];
 
 			return dest + filename;
+		},
+
+		cleanComponent: function (html) {
+			return html.replace(/<code[^>]*>((.|[\n\r])*)<\/code>/im, '---------------------------------------->>>>>>>>>>');
 		}
 	};
 
