@@ -73,7 +73,9 @@ exports.init = function Builder(grunt, options) {
 		clean: function(path) {
 			if (grunt.file.exists(path)) {
 				grunt.log.ok('Components path removed:  "' + path);
-				grunt.file.delete(path);
+				grunt.file.delete(path, {
+					force: true
+				});
 			}
 		},
 

@@ -106,3 +106,4 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
  * 2014-02-07   v0.3.2   Bugfix
  * 2014-02-07   v0.3.3   Remove unnecessary code
  * 2014-02-07   v0.3.4   Improve index generation
+ * 2014-02-07   v0.3.5   Force files deletion outside grunt context
