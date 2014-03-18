@@ -55,7 +55,7 @@ exports.init = function Templates(grunt, options) {
 			grunt.log.ok('File "' + methods.dest + '" created.');
 		},
 
-		getComponent: function(matcher) {
+		getComponent: function(matcher, again) {
 			var data,
 				str = matcher.match(/\{\{(.*)\}\}/)[1],
 				matcherArr = str.split(','),
@@ -66,7 +66,9 @@ exports.init = function Templates(grunt, options) {
 				componentStart,
 				componentEnd,
 				componentHTML,
-				json;
+				json,
+				matchAgain;
+
 
 			data = grunt.file.read(path, {
 				encoding: 'utf-8'
@@ -78,6 +80,12 @@ exports.init = function Templates(grunt, options) {
 			componentEnd = data.indexOf('</COMPONENT>');
 			componentHTML = data.substring(componentStart, componentEnd);
 			componentHTML = methods.addComponentContent(componentHTML, json, index);
+
+			matchAgain = componentHTML.match(/\{\{(.*)\}\}/);
+
+			if (matchAgain) {
+				componentHTML = componentHTML.replace(matchAgain[0], this.getComponent(componentHTML, true));
+			}
 
 			return componentHTML;
 		},
