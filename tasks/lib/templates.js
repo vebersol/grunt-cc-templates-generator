@@ -67,7 +67,8 @@ exports.init = function Templates(grunt, options) {
 				componentEnd,
 				componentHTML,
 				json,
-				matchAgain;
+				matchAgain,
+				i;
 
 
 			data = grunt.file.read(path, {
@@ -81,10 +82,12 @@ exports.init = function Templates(grunt, options) {
 			componentHTML = data.substring(componentStart, componentEnd);
 			componentHTML = methods.addComponentContent(componentHTML, json, index);
 
-			matchAgain = componentHTML.match(/\{\{(.*)\}\}/);
+			matchAgain = componentHTML.match(/\{\{(.*)\}\}/g);
 
 			if (matchAgain) {
-				componentHTML = componentHTML.replace(matchAgain[0], this.getComponent(componentHTML, true));
+				for (var i = matchAgain.length - 1; i >= 0; i--) {
+					componentHTML = componentHTML.replace(matchAgain[i], this.getComponent(componentHTML, true));
+				}
 			}
 
 			return componentHTML;
