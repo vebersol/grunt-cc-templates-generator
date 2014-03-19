@@ -109,3 +109,4 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
  * 2014-02-07   v0.3.5   Force files deletion outside grunt context
  * 2014-03-18   v0.3.6   Recursive mode: component could be called from other component
  * 2014-03-19   v0.3.7   Fix for last revision
+ * 2014-03-19   v0.3.8   Fix: replace variables on subcomponents
